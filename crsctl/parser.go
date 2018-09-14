@@ -31,8 +31,8 @@ type CheckResult struct {
 }
 
 func parseStatusResource(output string) (result []*ResourceStatus) {
-	for _, part := range strings.Split(output, "\n\n") {
-		partLines := strings.Split(part, "\n")
+	for _, part := range strings.Split(output, newLine+newLine) {
+		partLines := strings.Split(part, newLine)
 		if strings.HasPrefix(partLines[0], "NAME") {
 			name := strings.Split(partLines[0], "=")[1]
 			statesLine := strings.Split(partLines[3], "=")[1]
@@ -52,7 +52,7 @@ func parseStatusResource(output string) (result []*ResourceStatus) {
 }
 
 func parseCrsCheck(output string) (result CrsCheck) {
-	for _, line := range strings.Split(output, "\n") {
+	for _, line := range strings.Split(output, newLine) {
 		for svc, svcabbr := range crsServices {
 			if strings.Index(line, svc) != -1 {
 				if strings.Index(line, "is online") == -1 {
