@@ -41,7 +41,7 @@ func parseStatusResource(output string) (result []*ResourceStatus) {
 			r := ResourceStatus{Name: name}
 			for _, state := range states {
 				if strings.Index(state, "ONLINE") != -1 {
-					node := strings.Split(state, "on")[1]
+					node := strings.Split(state, " on ")[1]
 					r.OnlineNodes = append(r.OnlineNodes, strings.TrimSpace(node))
 				}
 			}
